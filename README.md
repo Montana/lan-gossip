@@ -1,3 +1,6 @@
+![image](https://user-images.githubusercontent.com/20936398/142780193-37883a4a-f269-4474-bcb7-7398987bff9e.png)
+
+
 # _NB: This Network Gossip writeup is for myself, but making it public as it could be useful for others._
 
 ## What is the Gossip Protocol? 
