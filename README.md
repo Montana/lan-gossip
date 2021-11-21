@@ -106,6 +106,10 @@ Once this is done the two clusters should be disentangled.
 **Piggybacking Gossip** information on application-generated messages could in theory be a fail-safe solution when running a high performance network.  The protocols are simulated and evaluated with a fault-injection model for scalable distributed systems comprised of clusters of workstations connected by high-performance networks, such as the CPlant machine at Sandia National Laboratories. The model supports permanent and transient node and link failures, with rates
 specified at simulation time, for processors functioning in a fail-silent fashion. Through high-fidelity, CAD-base modeling and simulation, we demonstrate the strengths and weaknesses of each approach in terms of agreement time, number of gossips, and overall scalability.
 
+<img width="729" alt="Screen Shot 2021-11-21 at 1 31 15 PM" src="https://user-images.githubusercontent.com/20936398/142779650-c086bd2c-e43a-4302-904f-6da38066613c.png">
+
+
+
 ## Branches 
 
 Make sure Consul checks the following:
