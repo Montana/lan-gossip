@@ -145,8 +145,8 @@ Now let's switch lanes into **Rumor mongering**:
 
 On to some more space, let's get into Spacial Gossip:
 
-* Spacial gossip is peer selection that is biased according to distance of the peer, so for example lets say we have a node, and this node is called a, so `node a', node a is proportional to `node d` where `d` is the distance of `node a`.
-* If the underlying topology is linear, then the expected traffic per link per cycle can be expected as follows 
+* Spacial gossip is peer selection that is biased according to distance of the peer, so for example lets say we have a node, and this node is called a, so `node a`, node a is proportional to `node d` where `d` is the distance of `node a`.
+* If the underlying topology is linear, then the expected traffic per link per cycle can be expected as follows:
 
 ```bash
 < 0;
