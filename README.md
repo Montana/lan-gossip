@@ -1,5 +1,8 @@
 # _NB: This Network Gossip writeup is for myself, but making it public as it could be useful for others._
 
+## What is the Gossip Protocol? 
+
+I'm going to give you a very top down definition, with a gossip protocol, nodes individually gossip their state, and the states of other nodes, to one another to eventually achieve a unified view of the system. If you want a more in-depth definition please visit: https://en.wikipedia.org/wiki/Gossip_protocol
 
 ## LAN Gossip
 
@@ -97,6 +100,11 @@ visa-versa.
 Once this rule is in place, both clusters will mark the nodes in the other cluster as failed (gossip detector will mark them all as down). Then you can issue a “consul force-leave” on all the failed nodes to prevent Consul from trying to recover those nodes.
 
 Once this is done the two clusters should be disentangled.
+
+## Piggybacking Gossip 
+
+**Piggybacking Gossip** information on application-generated messages could in theory be a fail-safe solution when running a high performance network.  The protocols are simulated and evaluated with a fault-injection model for scalable distributed systems comprised of clusters of workstations connected by high-performance networks, such as the CPlant machine at Sandia National Laboratories. The model supports permanent and transient node and link failures, with rates
+specified at simulation time, for processors functioning in a fail-silent fashion. Through high-fidelity, CAD-base modeling and simulation, we demonstrate the strengths and weaknesses of each approach in terms of agreement time, number of gossips, and overall scalability.
 
 ## Branches 
 
