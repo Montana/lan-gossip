@@ -21,6 +21,16 @@ use the list to periodically pick target members for **gossip**.
 
 However,  actual  implementations of heartbeating suffer from scalability limitations. Sending all heartbeats to a central server leads to hot-spot creation. Sending heartbeats to all members (through either network multicast, or gossiping) leads to a message load on the network and group that grows quadratically with the group size. Heartbeating along a logical ring suffers from un- predictability of failure detection time when there are multiple failures. Unfortunately, as the group size rises, so does the likelihood of simultaneous multiple failures.
 
+## Disallowing nodes in different datacenters to join in the same LAN gossip group
 
+A question that was brought to me is was as follows:
+
+>> Lets say there is `node1` in `dc1`, and `node2` in `dc2`, If you 'consul join' `node1` and `node2`, this will work and cause the LAN Gossips of `dc1` and `dc2` to become single gossip pool, not dynamic ones.
+
+>> This would be an extremely bad accident since disjoining this gossip pool seems to require to fully shutdown all consul agents, wipe their state
+and start them back up again. 
+
+>> I can't figure out any other way to prevent this sort of accident, other than using firewall rules to firewall the LAN gossip port between datacenters.
+Would be nice to have something builtin, within consul to avoid such accidental joining
 
 _To be continued_
