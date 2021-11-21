@@ -9,6 +9,9 @@ I'm going to give you a very top down definition, with a gossip protocol, nodes 
 Several distributed peer-to-peer applications require weakly-consistent knowledge of process group membership information at all participating processes. SWIM is a
 generic software module that offers this service for largescale process groups. The SWIM effort is motivated by the unscalability of traditional heart-beating protocols, which either impose network loads that grow quadratically with group size, or compromise response times or false positive frequency `WRT` detecting process crashes. This sometimes can be solved with WRT Software like "Tomato".
 
+<img width="1404" alt="Screen Shot 2021-11-21 at 1 33 48 PM" src="https://user-images.githubusercontent.com/20936398/142779769-1a6ddbcc-3ba1-40a5-9c6a-f6bc3cf0d35a.png">
+
+
 ## WAN Gossip
 
 Unlike traditional heartbeating protocols, SWIM separates the failure detection and membership update dissemination functionalities of the membership protocol. Processes are monitored through an efficient peer-to-peer periodic randomized probing protocol. Both the expected time to first detection of each process failure, and the expected message load per member, do not vary with group size. Information about membership changes, such as process joins, drop-outs and failures, is propagated via piggybacking on ping messages and acknowledgments. A robust and fast infection style (also epidemic or `gossipstyle`)
@@ -109,7 +112,6 @@ specified at simulation time, for processors functioning in a fail-silent fashio
 <img width="729" alt="Screen Shot 2021-11-21 at 1 31 15 PM" src="https://user-images.githubusercontent.com/20936398/142779650-c086bd2c-e43a-4302-904f-6da38066613c.png">
 
 
-
 ## Branches 
 
 Make sure Consul checks the following:
@@ -119,6 +121,44 @@ Make sure Consul checks the following:
 * WAN member joining non-server node
 
 You could block whichever port you run the LAN serf on (default 8300) between DC’s to prevent that type of join. It would still be possible to mix the WAN and LAN clusters locally in turn this is called "mingling gossip" or if they were in the same DC where the firewall rules didn’t apply.
+
+## Anti-Entropy Gossip, Gossip Skeletons, Rumor Mongering & Spacial Gossip
+
+**Anti-Entropy** Gossipping is very expensive, this is because it looks at the entire database, but fixes any distro erros. You can even get better results when you combine anti-entropy gossipping with **rumor mongering**. This happens via: 
+
+* Propagation of one given update, this can be limited (max 'K' times or with some probability, as countlessp papers have showed us) 
+* selectPeer: A random peer from the network can send a Gossip request 
+* Gossip Skeleton 
+* Rumor Mongering As an Instance 
+
+Now let's get into **Gossip Skeletons**:
+
+* The push-pull method 
+* The active thread inits communication in this case **push** and receives peerSate in this case **pull**. 
+
+Now let's switch lanes into **Rumor mongering**:
+
+* Gossipping nodes pick another node in each cycle, this is what I call "The Gossip Cycle", they do not need to know all the nodes, hence the term **rumor**. 
+* The pattern of communication between nodes defines a random graph 
+* When anti-entropy gossip finds an undelivered update: we redistribute 
+* There are various additional tricks to deal with removals using things like **Spacial Gossip**. 
+
+On to some more space, let's get into Spacial Gossip:
+
+* Spacial gossip is peer selection that is biased according to distance of the peer, so for example lets say we have a node, and this node is called a, so `node a', node a is proportional to `node d` where `d` is the distance of `node a`.
+* If the underlying topology is linear, then the expected traffic per link per cycle can be expected as follows 
+
+```bash
+< 0;
+< 1;
+< 1 < a < 2;
+a = 2;
+a > 2
+```
+**a=2 is the best**: 
+
+* Best tradeoff between speed and traffic 
+* Probability is proportional 
 
 
 _To be continued_
